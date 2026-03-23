@@ -1,12 +1,20 @@
+import { createClient } from "@/lib/supabase/server";
 import GridElement from "../element/grid-element";
-import { exemples } from "@/exemple";
 
-export default function MainGrid() {
+export default async function MainGrid() {
+
+  const supabase = await createClient()
+
+
+  let { data: panards, error } = await supabase
+    .from('panard')
+    .select('*')
+
   return (
     <div className="grid grid-cols-3 gap-2 mt-5">
       {
-        exemples.map((exemple, index) => {
-          return <GridElement exemple={exemple} key={index}></GridElement>
+        panards?.map((panard, index) => {
+          return <GridElement></GridElement>
         })
       }
     </div>
